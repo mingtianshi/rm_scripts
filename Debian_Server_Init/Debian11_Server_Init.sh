@@ -98,11 +98,11 @@ SET_INSTALL_OPENSSH=1
 # Enable ssh server(SSH开机是否自启 默认启用) Preset=1 
 SET_ENABLE_SSH=1
 # Install npm(安装配置npm) Preset=0
-SET_INSTALL_NPM=0
+SET_INSTALL_NPM=1
 # Install nodejs(是否安装Nodejs) Preset=0
-SET_INSTALL_NODEJS=0
+SET_INSTALL_NODEJS=1
 # Install cnpm (For Chinese) (是否安装CNPM) Preset=0
-SET_INSTALL_CNPM=0
+SET_INSTALL_CNPM=1
 
 # Config SSH Key(配置SSH Key) Preset=1
 SET_CONFIG_SSH_KEY=1
@@ -216,7 +216,7 @@ APT_TO_INSTALL_INDEX_1="
 
 ### 配置文件
 # Zshrc文件
-ZSHRC_CONFIG="# ~/.zshrc file for zsh non-login shells.
+ZSHRC_CONFIG="#     v file for zsh non-login shells.
 # see /usr/share/doc/zsh/examples/zshrc for examples
 
 setopt autocd              # change directory just by typing its name
@@ -426,13 +426,6 @@ alias duls='du -sh ./*'
 alias dulsd='du -sh \`la\`'
 alias zshrc='vim '\$HOME'/.zshrc'
 alias szsh='source '\$HOME'/.zshrc'
-alias systemctl='sudo systemctl'
-alias apt='sudo apt-get'
-alias upgrade='sudo apt update && sudo apt upgrade'
-alias ssa='sudo systemctl start'
-alias sss='sudo systemctl status'
-alias ssd='sudo systemctl stop'
-alias ssf='sudo systemctl restart'
 
 # unset _JAVA_OPTIONS
 
@@ -583,24 +576,24 @@ http
 }
 
 #mail {
-#	# See sample authentication script at:
-#	# http://wiki.nginx.org/ImapAuthenticateWithApachePhpScript
+#   # See sample authentication script at:
+#   # http://wiki.nginx.org/ImapAuthenticateWithApachePhpScript
 # 
-#	# auth_http localhost/auth.php;
-#	# pop3_capabilities \"TOP\" \"USER\";
-#	# imap_capabilities \"IMAP4rev1\" \"UIDPLUS\";
+#   # auth_http localhost/auth.php;
+#   # pop3_capabilities \"TOP\" \"USER\";
+#   # imap_capabilities \"IMAP4rev1\" \"UIDPLUS\";
 # 
-#	server {
-#		listen     localhost:110;
-#		protocol   pop3;
-#		proxy      on;
-#	}
+#   server {
+#       listen     localhost:110;
+#       protocol   pop3;
+#       proxy      on;
+#   }
 # 
-#	server {
-#		listen     localhost:143;
-#		protocol   imap;
-#		proxy      on;
-#	}
+#   server {
+#       listen     localhost:143;
+#       protocol   imap;
+#       proxy      on;
+#   }
 #}
 "
 
@@ -879,16 +872,16 @@ APACHE2_GLOBAL_CONF="# This is the main Apache server configuration file.  It co
 # It is split into several files forming the configuration hierarchy outlined
 # below, all located in the /etc/apache2/ directory:
 #
-#	/etc/apache2/
-#	|-- apache2.conf
-#	|	\`--  ports.conf
-#	|-- mods-enabled
-#	|	|-- *.load
-#	|	\`-- *.conf
-#	|-- conf-enabled
-#	|	\`-- *.conf
-# 	\`-- sites-enabled
-#	 	\`-- *.conf
+#   /etc/apache2/
+#   |-- apache2.conf
+#   |   \`--  ports.conf
+#   |-- mods-enabled
+#   |   |-- *.load
+#   |   \`-- *.conf
+#   |-- conf-enabled
+#   |   \`-- *.conf
+#   \`-- sites-enabled
+#       \`-- *.conf
 #
 #
 # * apache2.conf is the main configuration file (this file). It puts the pieces
@@ -1020,26 +1013,26 @@ Include ports.conf
 # your system is serving content from a sub-directory in /srv you must allow
 # access here, or in any related virtual host.
 <Directory />
-	Options FollowSymLinks
-	AllowOverride None
-	Require all denied
+    Options FollowSymLinks
+    AllowOverride None
+    Require all denied
 </Directory>
 
 <Directory /usr/share>
-	AllowOverride None
-	Require all granted
+    AllowOverride None
+    Require all granted
 </Directory>
 
 <Directory $HOME_INDEX/apache2>
-	Options Indexes FollowSymLinks
-	AllowOverride None
-	Require all granted
+    Options Indexes FollowSymLinks
+    AllowOverride None
+    Require all granted
 </Directory>
 
 #<Directory /srv/>
-#	Options Indexes FollowSymLinks
-#	AllowOverride None
-#	Require all granted
+#   Options Indexes FollowSymLinks
+#   AllowOverride None
+#   Require all granted
 #</Directory>
 
 # AccessFileName: The name of the file to look for in each directory
@@ -1053,7 +1046,7 @@ AccessFileName .htaccess
 # viewed by Web clients.
 #
 <FilesMatch \"^\.ht\">
-	Require all denied
+    Require all denied
 </FilesMatch>
 
 #
@@ -1087,36 +1080,36 @@ IncludeOptional sites-enabled/*.conf
 ServerName $SET_SERVER_NAME"
 
 APACHE2_HTTP_SITE="<VirtualHost *:80>
-	# The ServerName directive sets the request scheme, hostname and port that
-	# the server uses to identify itself. This is used when creating
-	# redirection URLs. In the context of virtual hosts, the ServerName
-	# specifies what hostname must appear in the request's Host: header to
-	# match this virtual host. For the default virtual host (this file) this
-	# value is not decisive as it is used as a last resort host regardless.
-	# However, you must set it for any further virtual host explicitly.
-	#ServerName www.example.com
+    # The ServerName directive sets the request scheme, hostname and port that
+    # the server uses to identify itself. This is used when creating
+    # redirection URLs. In the context of virtual hosts, the ServerName
+    # specifies what hostname must appear in the request's Host: header to
+    # match this virtual host. For the default virtual host (this file) this
+    # value is not decisive as it is used as a last resort host regardless.
+    # However, you must set it for any further virtual host explicitly.
+    #ServerName www.example.com
 
-	ServerAdmin webmaster@$SET_SERVER_NAME
-	DocumentRoot $HOME_INDEX/apache2
-	ServerAdmin  $SET_SERVER_NAME@example.com邮箱  # 错误页面将会显示这个邮箱
-	ServerSignature Off    # 关闭服务器签名
-	ServerTokens Prod    # 隐藏 Apache 和 PHP 版本等属性
+    ServerAdmin webmaster@$SET_SERVER_NAME
+    DocumentRoot $HOME_INDEX/apache2
+    ServerAdmin  $SET_SERVER_NAME@example.com邮箱  # 错误页面将会显示这个邮箱
+    ServerSignature Off    # 关闭服务器签名
+    ServerTokens Prod    # 隐藏 Apache 和 PHP 版本等属性
 
-	# Available loglevels: trace8, ..., trace1, debug, info, notice, warn,
-	# error, crit, alert, emerg.
-	# It is also possible to configure the loglevel for particular
-	# modules, e.g.
-	#LogLevel info ssl:warn
+    # Available loglevels: trace8, ..., trace1, debug, info, notice, warn,
+    # error, crit, alert, emerg.
+    # It is also possible to configure the loglevel for particular
+    # modules, e.g.
+    #LogLevel info ssl:warn
 
-	ErrorLog \${APACHE_LOG_DIR}/error.log
-	CustomLog \${APACHE_LOG_DIR}/access.log combined
+    ErrorLog \${APACHE_LOG_DIR}/error.log
+    CustomLog \${APACHE_LOG_DIR}/access.log combined
 
-	# For most configuration files from conf-available/, which are
-	# enabled or disabled at a global level, it is possible to
-	# include a line for only one particular virtual host. For example the
-	# following line enables the CGI configuration for this host only
-	# after it has been globally disabled with \"a2disconf\".
-	#Include conf-available/serve-cgi-bin.conf
+    # For most configuration files from conf-available/, which are
+    # enabled or disabled at a global level, it is possible to
+    # include a line for only one particular virtual host. For example the
+    # following line enables the CGI configuration for this host only
+    # after it has been globally disabled with \"a2disconf\".
+    #Include conf-available/serve-cgi-bin.conf
 </VirtualHost>
 
 # vim: syntax=apache ts=4 sw=4 sts=4 sr noet"
@@ -1778,7 +1771,7 @@ if ! [ "$SET_HOST_NAME" -eq 0 ];then
     if [ $idxlen -eq 1 ];then
         # 删除行
         sed -i "$idx d" /etc/hosts
-        # echo "127.0.1.1	$HOSTNAME" >> /etc/hosts
+        # echo "127.0.1.1   $HOSTNAME" >> /etc/hosts
         # 在前面插入
         sed -i "$idx i $I_STRING" /etc/hosts
     elif [ $idxlen -eq 0 ];then
@@ -2106,7 +2099,7 @@ elif [ "$SET_INSTALL_HTTP_SERVER" -eq 2 ];then
             backupFile /etc/apache2/apache2.conf
             search_line=`nl -b a /etc/apache2/apache2.conf | sed -n '/share>/p'`
             OLD_IFS="$IFS"
-            IFS="	"
+            IFS="   "
             # 第几行
             line=($search_line)
             IFS="$OLD_IFS"
@@ -2114,10 +2107,10 @@ elif [ "$SET_INSTALL_HTTP_SERVER" -eq 2 ];then
             d_line=$((line+1))
             # 删除Require all granted改为Require all denied
             # <Directory /usr/share>
-            #	AllowOverride None
-            #	Require all granted
+            #   AllowOverride None
+            #   Require all granted
             # </Directory>
-            sed -i "$d_line d" /etc/apache2/apache2.conf && sed -i "$line a\	Require all denied" /etc/apache2/apache2.conf
+            sed -i "$d_line d" /etc/apache2/apache2.conf && sed -i "$line a\    Require all denied" /etc/apache2/apache2.conf
         fi
         if [ "$SET_ENABLE_HTTPS_SITE" -eq 0 ];then
             prompt -x "Disable default site and Enable nginx https site."

@@ -8,7 +8,7 @@ Version：0.1.2
 if [ "$" -eq 1 ];then
     
 fi
-!说明
+!说明 User_Po_linux_1
 # root用户密码
 ROOT_PASSWD=""
 ## 检查点一：
@@ -67,7 +67,7 @@ SET_APT_INSTALL=1
 3.全部安装
 Preset=1
 注释
-SET_APT_INSTALL_LIST_INDEX=1
+SET_APT_INSTALL_LIST_INDEX=3
 # 安装Python3 Preset=1
 SET_PYTHON3_INSTALL=1
 # 配置Python3源为清华大学镜像 Preset=1
